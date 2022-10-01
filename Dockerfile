@@ -1,7 +1,9 @@
 FROM python:3.7-alpine
-WORKDIR /code
-RUN apt-get update && apt-get install python-pip
-COPY requirements.txt requirements.txt
-RUN  pip install -r requirements.txt
+WORKDIR /DevOps-Challenge
+ADD . .
+RUN apk update && apk add py-pip
+RUN pip install redis==3.0.1 && tornado==5.1.1
 EXPOSE 6379
 CMD export $(cat .env | xargs) && python hello.py
+
+
